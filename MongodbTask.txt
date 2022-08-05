@@ -1,0 +1,125 @@
+1>> To Create DB (select DB or create it if not exist)
+ >>use FacultySystemDB
+
+2>>Create collection:
+ >>db.createCollection(student)
+ >>db.student.insertOne(
+   {FirstName: 'Yasmin',
+    LastName:'Kassem',
+    Age:'26',
+    Faculty:'Engineering',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   }
+   )
+
+3>>
+   >>db.student.insert(
+   {FirstName: 'Ali',
+    LastName:'Mohamed',
+    Age:'20',
+    Faculty:'Engineering',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   }
+   )
+
+   >>db.student.insert(
+   [
+   {FirstName: 'Ali',
+    LastName:'Mohamed',
+    Age:'20',
+    Faculty:'Engineering',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   },
+   {FirstName: 'Yasmin',
+    LastName:'Kassem',
+    Age:'26',
+    Faculty:'Engineering',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   },
+   {FirstName: 'Kamal',
+    LastName:'Mohammed',
+    Age:'30',
+    Faculty:'Computer Science',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   }
+
+    
+   ]
+   )
+
+4>>db.student.find().pretty()
+ >>db.student.find({}).pretty()
+ >>db.student.find({FirstName: 'Yasmin'}).pretty()
+ >>db.student.find({$or:[{FirstName: 'Ahmed'},{LastName:'Ahmed'}]}).pretty()
+ >>db.student.find({"FirstName":{$ne:'Ahmed'}}).pretty()
+ >>db.student.find({age:{$lt:21}}).pretty()
+ >>db.student.find({IsFired:true}).pretty()
+ >>db.student.find({$or:[{age:{$gte:21},{Faculty:{$exist:true}]}).pretty()
+ >>db.student.find({FirstName: 'Yasmin'},{FirstName:1,LastName:1,IsFired:1,_id:0}).pretty()
+ 
+5>>db.student.update({FirstName: 'Yasmin'},{LastName:'Mohamed'})
+ >>db.student.update({FirstName: 'Yasmin'},{$set:{FirstName: 'Hala'}})
+ >>db.student.update({FirstName: 'Yasmin'},{LastName:'Mohamed'},{multi:true}) 
+ >>db.student.updateMany({FirstName: 'Yasmin'},{LastName:'Mohamed'})
+ >>db.student.save(_id:ObjectId(5983548781331adf45ec7),
+  {FirstName: 'Kamal',
+    LastName:'Mohammed',
+    Age:'30',
+    Faculty:'Computer Science',
+    Grades:[
+	   {CourseName:'html', Grade:'very good', Pass:true }
+	   {CourseName:'css', Grade:'very good', Pass:true }
+	   ],
+   IsFired:false
+   })
+
+6>>db.student.delete({IsFired:true})
+7>>db.student.drop()
+8>>db.dropDatabase()
+9>>use FacultySystemV2
+>>db.student.insert(
+   {FirstName: 'Yasmin',
+    LastName:'Kassem',
+    FacultyID:3,
+    Grades:[
+	   {CourseID:1, grade:'very good' },
+ 	   {CourseID:2, grade:'very good' }
+	   ],
+   IsFired:false
+   }
+   )
+>>db.Faculty.insert({
+ FacultyName:'XYZ',
+ Address:{
+country:'Egypt',
+city:'luxor'
+}
+})
+
+>>db.Course.insert({
+ CourseName:'JavaScript',
+ FinalMark:89
+}
+})
+
+>>>db.Course.createIndex({CourseName:1})
